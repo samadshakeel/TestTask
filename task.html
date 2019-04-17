@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8' />
+        <title>Task</title>
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+
+        <style>
+            body { margin:0; padding:0; }
+            #map { position:absolute; top:0; bottom:0; width:100%; }
+            .legend {
+                background-color: #fff;
+                border-radius: 3px;
+                bottom: 30px;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.10);
+                font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+                padding: 10px;
+                position: absolute;
+                right: 30px;
+                z-index: 1;
+                width: 200px;
+            }
+            
+            .legend h4 {
+                margin: 0 0 10px;
+            }
+            
+            .legend div span {
+                border-radius: 50%;
+                display: inline-block;
+                height: 10px;
+                margin-right: 5px;
+                width: 10px;
+            }
+            
+        </style>
+    </head>
+    <body>
+
+        <div id='map'></div>
+     
+        
+        <script>
+            
+            mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtYWRzaGFrZWVsIiwiYSI6ImNqdWsxOWRmczAzOTk0NHFzcDEyMGg4Y3gifQ.-iRVQQSpnuNOHfmj_y9lEA';
+            var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/samadshakeel/cjuk1yay00fr11fqo3i1wdth7',
+                center: [-77.05954, 38.86188 ],
+                zoom: 9
+            });
+            
+            map.on('load', function() {
+        
+            // Add a layer showing the places.
+            map.addLayer({
+                "id": "stations",
+                "type": "symbol",
+                "source": {
+                "type": "geojson",
+                "data": {
+                "type": "FeatureCollection",
+                "features": [
+                { "type": "Feature", "properties": { "name": "Van Dorn Street", "marker-color": '#0000ff', "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.12911, 38.79931 ] } },
+                { "type": "Feature", "properties": { "name": "Franconia-Springfield", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.16797, 38.76652 ] } },
+                { "type": "Feature", "properties": { "name": "Federal Center SW", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.01587, 38.88507 ] } },
+                { "type": "Feature", "properties": { "name": "Judiciary Sq", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.01664, 38.89609 ] } },
+                { "type": "Feature", "properties": { "name": "Capitol South", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.00514, 38.88506 ] } },
+                { "type": "Feature", "properties": { "name": "Metro Center", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.02808, 38.89831 ] } },
+                { "type": "Feature", "properties": { "name": "Gallery Pl-Chinatown", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.02192, 38.89832 ] } },
+                { "type": "Feature", "properties": { "name": "Mt Vernon Sq - 7th St Convention Center", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -77.02191, 38.90644 ] } },
+                { "type": "Feature", "properties": { "name": "U St\/African-Amer Civil War Memorial\/Cardozo", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -77.0275, 38.917 ] } },
+                { "type": "Feature", "properties": { "name": "Union Station", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.00741, 38.89777 ] } },
+                { "type": "Feature", "properties": { "name": "Congress Heights", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -76.98851, 38.84566 ] } },
+                { "type": "Feature", "properties": { "name": "Naylor Road", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -76.95626, 38.8513 ] } },
+                { "type": "Feature", "properties": { "name": "Suitland", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -76.93187, 38.84396 ] } },
+                { "type": "Feature", "properties": { "name": "Branch Ave", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -76.91146, 38.82645 ] } },
+                { "type": "Feature", "properties": { "name": "Braddock Road", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.05367, 38.81414 ] } },
+                { "type": "Feature", "properties": { "name": "King St - Old Town", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.06081, 38.80659 ] } },
+                { "type": "Feature", "properties": { "name": "Eisenhower Ave", "marker-col": "#ffff00", "marker-sym": "rail-metro", "line": "yellow" }, "geometry": { "type": "Point", "coordinates": [ -77.07087, 38.80043 ] } },
+                { "type": "Feature", "properties": { "name": "Huntington", "marker-col": "#ffff00", "marker-sym": "rail-metro", "line": "yellow" }, "geometry": { "type": "Point", "coordinates": [ -77.07521, 38.79392 ] } },
+                { "type": "Feature", "properties": { "name": "Anacostia", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -76.99537, 38.86296 ] } },
+                { "type": "Feature", "properties": { "name": "Eastern Market", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -76.996, 38.88462 ] } },
+                { "type": "Feature", "properties": { "name": "Potomac Ave", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -76.9855, 38.88126 ] } },
+                { "type": "Feature", "properties": { "name": "Stadium Armory", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -76.97709, 38.88671 ] } },
+                { "type": "Feature", "properties": { "name": "Rhode Island Ave", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -76.99594, 38.92106 ] } },
+                { "type": "Feature", "properties": { "name": "Minnesota Ave", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -76.94675, 38.89919 ] } },
+                { "type": "Feature", "properties": { "name": "Van Ness-UDC", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.06299, 38.94327 ] } },
+                { "type": "Feature", "properties": { "name": "Cleveland Park", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.05804, 38.93476 ] } },
+                { "type": "Feature", "properties": { "name": "Columbia Heights", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -77.03255, 38.92784 ] } },
+                { "type": "Feature", "properties": { "name": "College Park-U of Md", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -76.92812, 38.97863 ] } },
+                { "type": "Feature", "properties": { "name": "Capitol Heights", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -76.91181, 38.88947 ] } },
+                { "type": "Feature", "properties": { "name": "Morgan Boulevard", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -76.86807, 38.89383 ] } },
+                { "type": "Feature", "properties": { "name": "Georgia Ave Petworth", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -77.02346, 38.93743 ] } },
+                { "type": "Feature", "properties": { "name": "Takoma", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.01818, 38.97608 ] } },
+                { "type": "Feature", "properties": { "name": "Glenmont", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.05356, 39.06178 ] } },
+                { "type": "Feature", "properties": { "name": "Wheaton", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.05011, 39.03753 ] } },
+                { "type": "Feature", "properties": { "name": "Forest Glen", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.04292, 39.01495 ] } },
+                { "type": "Feature", "properties": { "name": "Silver Spring", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.03102, 38.99395 ] } },
+                { "type": "Feature", "properties": { "name": "Brookland-CUA", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -76.99453, 38.93321 ] } },
+                { "type": "Feature", "properties": { "name": "Fort Totten", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.0022, 38.95185 ] } },
+                { "type": "Feature", "properties": { "name": "Prince George's Plaza", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -76.95588, 38.96539 ] } },
+                { "type": "Feature", "properties": { "name": "West Hyattsville", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -76.96958, 38.95504 ] } },
+                { "type": "Feature", "properties": { "name": "Benning Road", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -76.93836, 38.89098 ] } },
+                { "type": "Feature", "properties": { "name": "Addison Road Seat Pleasant", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -76.89411, 38.88675 ] } },
+                { "type": "Feature", "properties": { "name": "Deanwood", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -76.93526, 38.90818 ] } },
+                { "type": "Feature", "properties": { "name": "New Carrollton", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -76.87184, 38.94778 ] } },
+                { "type": "Feature", "properties": { "name": "Landover", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -76.8912, 38.93351 ] } },
+                { "type": "Feature", "properties": { "name": "Cheverly", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -76.91663, 38.91663 ] } },
+                { "type": "Feature", "properties": { "name": "Largo Town Center", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -76.84204, 38.90507 ] } },
+                { "type": "Feature", "properties": { "name": "NoMa - Gallaudet U", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.00302, 38.90702 ] } },
+                { "type": "Feature", "properties": { "name": "Rosslyn", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.07091, 38.89598 ] } },
+                { "type": "Feature", "properties": { "name": "Arlington|Cemetery", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.06281, 38.88469 ] } },
+                { "type": "Feature", "properties": { "name": "Dupont Circle", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.04341, 38.9096 ] } },
+                { "type": "Feature", "properties": { "name": "Pentagon", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.05372, 38.86946 ] } },
+                { "type": "Feature", "properties": { "name": "Crystal City", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.05029, 38.8579 ] } },
+                { "type": "Feature", "properties": { "name": "Navy Yard - Ballpark", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -77.00509, 38.87648 ] } },
+                { "type": "Feature", "properties": { "name": "McPherson Sq", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.03363, 38.90133 ] } },
+                { "type": "Feature", "properties": { "name": "Shaw-Howard Univ", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -77.02191, 38.91348 ] } },
+                { "type": "Feature", "properties": { "name": "Southern Ave", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -76.97505, 38.84109 ] } },
+                { "type": "Feature", "properties": { "name": "Greenbelt", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -76.91106, 39.01115 ] } },
+                { "type": "Feature", "properties": { "name": "Tenleytown-AU", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.07959, 38.94885 ] } },
+                { "type": "Feature", "properties": { "name": "West Falls Church VT\/UVA", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -77.18909, 38.90078 ] } },
+                { "type": "Feature", "properties": { "name": "Dunn Loring Merrifield", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -77.22716, 38.88363 ] } },
+                { "type": "Feature", "properties": { "name": "Vienna Fairfax-GMU", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -77.27262, 38.8776 ] } },
+                { "type": "Feature", "properties": { "name": "Friendship Heights", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.085, 38.95948 ] } },
+                { "type": "Feature", "properties": { "name": "Shady Grove", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.16463, 39.11993 ] } },
+                { "type": "Feature", "properties": { "name": "Rockville", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.14613, 39.08432 ] } },
+                { "type": "Feature", "properties": { "name": "Twinbrook", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.12082, 39.06247 ] } },
+                { "type": "Feature", "properties": { "name": "White Flint", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.11283, 39.04815 ] } },
+                { "type": "Feature", "properties": { "name": "Grosvenor-Strathmore", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.10385, 39.02927 ] } },
+                { "type": "Feature", "properties": { "name": "Medical Center", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.09695, 39.00006 ] } },
+                { "type": "Feature", "properties": { "name": "Bethesda", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.09413, 38.98439 ] } },
+                { "type": "Feature", "properties": { "name": "Foggy Bottom GWU", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.05028, 38.9007 ] } },
+                { "type": "Feature", "properties": { "name": "Court House", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -77.08713, 38.89018 ] } },
+                { "type": "Feature", "properties": { "name": "Clarendon", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -77.09539, 38.8867 ] } },
+                { "type": "Feature", "properties": { "name": "East Falls Church", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -77.15688, 38.88595 ] } },
+                { "type": "Feature", "properties": { "name": "Virginia Square-GMU", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -77.10298, 38.88337 ] } },
+                { "type": "Feature", "properties": { "name": "Ballston-MU", "marker-col": "#ffa500", "marker-sym": "rail-metro", "line": "orange" }, "geometry": { "type": "Point", "coordinates": [ -77.11317, 38.88218 ] } },
+                { "type": "Feature", "properties": { "name": "Farragut West", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.0407, 38.90131 ] } },
+                { "type": "Feature", "properties": { "name": "Farragut North", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.0397, 38.9032 ] } },
+                { "type": "Feature", "properties": { "name": "Woodley Park-Zoo Adams Morgan", "marker-col": "#ff0000", "marker-sym": "rail-metro", "line": "red" }, "geometry": { "type": "Point", "coordinates": [ -77.05242, 38.92509 ] } },
+                { "type": "Feature", "properties": { "name": "L'Enfant Plaza", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -77.02191, 38.88484 ] } },
+                { "type": "Feature", "properties": { "name": "Smithsonian", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.02807, 38.88802 ] } },
+                { "type": "Feature", "properties": { "name": "Pentagon City", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.05954, 38.86188 ] } },
+                { "type": "Feature", "properties": { "name": "Federal Triangle", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.02813, 38.89318 ] } },
+                { "type": "Feature", "properties": { "name": "Archives-Navy Mem'l", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -77.02191, 38.89367 ] } },
+                { "type": "Feature", "properties": { "name": "Waterfront", "marker-col": "#008000", "marker-sym": "rail-metro", "line": "green" }, "geometry": { "type": "Point", "coordinates": [ -77.01751, 38.87646 ] } },
+                { "type": "Feature", "properties": { "name": "Ronald Reagan Washington National Airport", "marker-col": "#0000ff", "marker-sym": "rail-metro", "line": "blue" }, "geometry": { "type": "Point", "coordinates": [ -77.04404, 38.85342 ] } }
+                
+                ]}
+                },
+                "layout": {
+                "icon-image": "{marker-sym}-15",
+                "icon-allow-overlap": true
+                }
+            });
+
+            var popup = new mapboxgl.Popup({
+            closeButton: false,
+            closeOnClick: false
+            });
+            
+            map.on('mouseenter', 'stations', function(e) {
+            map.getCanvas().style.cursor = 'pointer';
+            
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            var description = e.features[0].properties.name;
+            var color = e.features[0].properties.line;
+
+            
+            // Ensure that if the map is zoomed out such that multiple
+            // copies of the feature are visible, the popup appears
+            // over the copy being pointed to.
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+            $('#name').text(description);
+            $('#line').text(color);
+            $('#color').css('background-color', color);
+
+
+            popup.setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+            });
+            
+            map.on('mouseleave', 'stations', function() {
+            map.getCanvas().style.cursor = '';
+            popup.remove();
+            });
+            });
+    
+        </script>
+
+        <div id='state-legend' class='legend'>
+            <h4>LEGEND</h4>
+            <b>Name: </b><span id="name"></span>
+            <div><b>Color: </b><span id="color"></span></div>
+            <b>Line: </b><span id="line"></span>
+
+        </div>
+    </body>
+</html>
